@@ -5,19 +5,26 @@
  */
 
 // Plugins
-import { registerPlugins } from '@/plugins'
+import { registerPlugins } from "@/plugins";
 
 // Components
-import App from './App.vue'
+import App from "./App.vue";
 
 // Composables
-import { createApp } from 'vue'
+import { createApp } from "vue";
 
 // Styles
-import 'unfonts.css'
+import "unfonts.css";
 
-const app = createApp(App)
+// Stores
+import { useAuthStore } from "@/stores/auth";
 
-registerPlugins(app)
+const app = createApp(App);
 
-app.mount('#app')
+registerPlugins(app);
+
+app.mount("#app");
+
+// Inicializar auth store após montagem
+const authStore = useAuthStore();
+authStore.initialize();
