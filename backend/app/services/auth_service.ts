@@ -1,6 +1,6 @@
 import User from '#models/user'
 import UserRepository from '#repositories/user_repository'
-import hash from '@adonisjs/core/services/hash'
+import { Hashing } from '../helpers/hashing.js'
 
 export interface LoginCredentials {
   email: string
@@ -36,14 +36,14 @@ export default class AuthService {
     }
 
     // Verificar senha
-    const isPasswordValid = await hash.verify(user.password, password)
+    const isPasswordValid = await Hashing.verify(user.password, password)
 
     if (!isPasswordValid) {
       throw new Error('Invalid credentials')
     }
 
     // Gerar token
-    const token = await this.userRepository.login(user);
+    const token = await this.userRepository.login(user)
 
     return {
       token: token.value!.release(),
