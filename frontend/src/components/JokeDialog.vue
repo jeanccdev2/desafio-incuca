@@ -17,11 +17,9 @@
                     <p class="text-h6 mb-4">{{ joke }}</p>
 
                     <v-alert type="info" variant="tonal" class="mt-4" icon="mdi-information">
-                        {{ jokesNeeded - jokesRead === 0
-                            ? 'Você já atingiu o nível máximo de felicidade com nossas piadas!'
-                            : `Leia ${jokesNeeded - jokesRead} piada(s) para ficar 100% feliz!`
-                        }}
-                    </v-alert>
+                        {{ jokesNeeded - jokesRead <= 0
+                            ? 'Você já atingiu o nível máximo de felicidade com nossas piadas!' : `Leia ${jokesNeeded -
+                            jokesRead} piada(s) para ficar 100% feliz!` }} </v-alert>
                 </div>
 
                 <v-alert v-if="error" type="error" variant="tonal" class="mt-4" closable
@@ -30,7 +28,7 @@
                 </v-alert>
             </v-card-text>
 
-            <v-card-actions class="pa-6">
+            <v-card-actions class="pa-6 actions-mobile">
                 <v-btn color="primary" variant="outlined" :disabled="loading" @click="$emit('fetch-joke')">
                     <v-icon start>mdi-refresh</v-icon>
                     Outra piada
@@ -40,7 +38,7 @@
 
                 <v-btn color="success" variant="elevated" :disabled="!isFullyHappy" @click="$emit('finish')">
                     <v-icon start>mdi-check</v-icon>
-                    {{ isFullyHappy ? 'Estou Feliz!' : `Preciso de mais ${jokesNeeded - jokesRead} piada(s)` }}
+                    Estou Feliz!
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -67,6 +65,25 @@ defineEmits<{
 </script>
 
 <style scoped>
+.actions-mobile {
+    display: flex;
+    gap: 12px;
+}
+
+/* Mobile: até 600px */
+@media (max-width: 600px) {
+    .actions-mobile {
+        flex-direction: column;
+        align-items: stretch;
+        /* botões pegam toda a largura */
+    }
+
+    .actions-mobile .v-spacer {
+        display: none;
+        /* remove o espaço entre os botões */
+    }
+}
+
 .joke-modal {
     border-radius: 16px;
     overflow: hidden;

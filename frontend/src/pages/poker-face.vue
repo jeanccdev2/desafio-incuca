@@ -31,7 +31,7 @@ const currentJoke = ref('')
 const loadingJoke = ref(false)
 const error = ref<string | null>(null)
 const jokesRead = ref(0)
-const jokesNeeded = 4
+const jokesNeeded = 3
 
 onMounted(() => {
   moodStore.setMood('poker')
