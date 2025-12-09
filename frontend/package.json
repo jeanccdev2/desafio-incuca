@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "test": "vitest"
   },
   "dependencies": {
     "@fontsource/roboto": "5.2.7",
@@ -21,13 +22,19 @@
     "vuetify": "^3.10.1"
   },
   "devDependencies": {
+    "@pinia/testing": "^1.0.3",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.9.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vitest/coverage-v8": "^4.0.15",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.35.0",
     "eslint-config-vuetify": "^4.2.0",
+    "happy-dom": "^20.0.11",
+    "jsdom": "^27.3.0",
     "npm-run-all2": "^8.0.4",
+    "resize-observer-polyfill": "^1.5.1",
     "sass-embedded": "^1.92.1",
     "typescript": "~5.9.2",
     "unplugin-auto-import": "^20.1.0",
@@ -37,6 +44,7 @@
     "vite": "^7.1.5",
     "vite-plugin-vue-layouts-next": "^1.0.0",
     "vite-plugin-vuetify": "^2.1.2",
+    "vitest": "^4.0.15",
     "vue-tsc": "^3.0.7"
   }
 }
