@@ -2,36 +2,11 @@
   <v-container class="fill-height mood-container" fluid @click="handleClick">
     <v-row align="center" justify="center">
       <v-col cols="12" class="text-center">
-        <v-card class="mx-auto mood-card" max-width="600" elevation="8">
-          <v-card-text class="pa-12">
-            <div class="mood-emoji mb-6">
-              {{ moodStore.moodEmoji }}
-            </div>
-            <h1 class="text-h3 mb-4">{{ moodStore.moodDescription }}</h1>
-            <p class="text-h6 text-medium-emphasis">
-              Clique em qualquer lugar para começar
-            </p>
-            
-            <div class="mt-6">
-              <v-progress-linear
-                :model-value="moodStore.happiness"
-                color="primary"
-                height="8"
-                rounded
-              />
-              <p class="text-caption mt-2">
-                Nível de felicidade: {{ moodStore.happiness }}%
-              </p>
-            </div>
-          </v-card-text>
-        </v-card>
+        <MoodCard :emoji="moodStore.moodEmoji" :title="moodStore.moodDescription"
+          description="Clique em qualquer lugar para começar" :happiness="moodStore.happiness" card-class="mood-card"
+          emoji-class="float-emoji" progress-color="primary" />
 
-        <v-btn
-          class="mt-6"
-          color="error"
-          variant="outlined"
-          @click.stop="handleLogout"
-        >
+        <v-btn class="mt-6" color="error" variant="outlined" @click.stop="handleLogout">
           <v-icon start>mdi-logout</v-icon>
           Sair
         </v-btn>
@@ -45,6 +20,7 @@ import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMoodStore } from '@/stores/mood'
 import { useAuthStore } from '@/stores/auth'
+import MoodCard from '@/components/MoodCard.vue'
 
 const router = useRouter()
 const moodStore = useMoodStore()
@@ -88,16 +64,19 @@ function handleLogout() {
   transform: scale(1.05);
 }
 
-.mood-emoji {
+.float-emoji {
   font-size: 120px;
   line-height: 1;
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }

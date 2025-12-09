@@ -2,34 +2,15 @@
   <v-container class="fill-height mood-container-sad" fluid @click="handleClick">
     <v-row align="center" justify="center">
       <v-col cols="12" class="text-center">
-        <v-card class="mx-auto mood-card-sad" max-width="600" elevation="8">
-          <v-card-text class="pa-12">
-            <div class="mood-emoji mb-6">
-              {{ moodStore.moodEmoji }}
-            </div>
-            <h1 class="text-h3 mb-4 text-sad">{{ moodStore.moodDescription }}</h1>
-            <p class="text-h6 text-medium-emphasis">
-              A vida é difícil... Clique para melhorar
-            </p>
-            
-            <div class="mt-6">
-              <v-progress-linear
-                :model-value="moodStore.happiness"
-                color="error"
-                height="8"
-                rounded
-              />
-              <p class="text-caption mt-2">
-                Nível de felicidade: {{ moodStore.happiness }}%
-              </p>
-            </div>
-
-            <!-- Efeito de lágrimas -->
-            <div class="tears">
-              <div class="tear" v-for="i in 3" :key="i" :style="{ left: `${20 + i * 25}%`, animationDelay: `${i * 0.5}s` }">💧</div>
-            </div>
-          </v-card-text>
-        </v-card>
+        <MoodCard :emoji="moodStore.moodEmoji" :title="moodStore.moodDescription"
+          description="A vida é difícil... Clique para melhorar" :happiness="moodStore.happiness"
+          card-class="mood-card-sad" emoji-class="shake-emoji" title-class="text-sad" progress-color="error">
+          <!-- Efeito de lágrimas -->
+          <div class="tears">
+            <div class="tear" v-for="i in 3" :key="i"
+              :style="{ left: `${20 + i * 25}%`, animationDelay: `${i * 0.5}s` }">💧</div>
+          </div>
+        </MoodCard>
       </v-col>
     </v-row>
   </v-container>
@@ -39,6 +20,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMoodStore } from '@/stores/mood'
+import MoodCard from '@/components/MoodCard.vue'
 
 const router = useRouter()
 const moodStore = useMoodStore()
@@ -77,7 +59,7 @@ function handleClick() {
   transform: scale(1.05);
 }
 
-.mood-emoji {
+.shake-emoji {
   font-size: 120px;
   line-height: 1;
   animation: shake 2s ease-in-out infinite;
@@ -88,12 +70,16 @@ function handleClick() {
 }
 
 @keyframes shake {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(-5deg);
   }
+
   75% {
     transform: rotate(5deg);
   }
@@ -118,6 +104,7 @@ function handleClick() {
     transform: translateY(0);
     opacity: 1;
   }
+
   100% {
     transform: translateY(200px);
     opacity: 0;
