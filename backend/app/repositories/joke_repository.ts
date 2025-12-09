@@ -11,11 +11,9 @@ export default class JokeRepository {
   // Buscar uma piada aleatória da API externa
   async fetchRandomJoke(): Promise<JokeData> {
     try {
-      const response = await axios.get<string>(`${this.apiUrl}?format=json`)
+      const response = await axios.get<JokeData>(`${this.apiUrl}?format=json`)
 
-      return {
-        joke: response.data,
-      }
+      return response.data;
     } catch (error) {
       throw new Error('Failed to fetch joke from external API')
     }
