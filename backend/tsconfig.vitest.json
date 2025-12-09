@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "#controllers/*": ["./app/controllers/*"],
+      "#exceptions/*": ["./app/exceptions/*"],
+      "#models/*": ["./app/models/*"],
+      "#mails/*": ["./app/mails/*"],
+      "#services/*": ["./app/services/*"],
+      "#repositories/*": ["./app/repositories/*"],
+      "#listeners/*": ["./app/listeners/*"],
+      "#events/*": ["./app/events/*"],
+      "#middleware/*": ["./app/middleware/*"],
+      "#validators/*": ["./app/validators/*"],
+      "#providers/*": ["./providers/*"],
+      "#policies/*": ["./app/policies/*"],
+      "#abilities/*": ["./app/abilities/*"],
+      "#database/*": ["./database/*"],
+      "#start/*": ["./start/*"],
+      "#tests/*": ["./tests/*"],
+      "#config/*": ["./config/*"],
+      "#helpers/*": ["./app/helpers/*"],
+    }
+  }
+}
